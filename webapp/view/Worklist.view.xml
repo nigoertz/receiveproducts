@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="com.generalgoods.mm.gtwo.receiveproducts.receiveproducts.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+        <semantic:headerContent>
+            <smartFilterBar:SmartFilterBar id="masterFilterBar" entitySet="LieferungenSet" liveMode="true" persistencyKey="gmMasterFilterBar">
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration key="Vbeln" visibleInAdvancedArea="true"/>
+                    <smartFilterBar:ControlConfiguration key="Lifnr" visibleInAdvancedArea="true"/>
+                    <smartFilterBar:ControlConfiguration key="Lfdat" visibleInAdvancedArea="true"/>
+                    <smartFilterBar:ControlConfiguration key="Vstel" visibleInAdvancedArea="true"/>
+                </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+        </semantic:headerContent>
+
+        <semantic:content>
+            <smartTable:SmartTable id="masterTable"
+                tableType="ResponsiveTable"
+                entitySet="LieferungenSet"
+                smartFilterId="masterFilterBar"
+                initiallyVisibleFields="Vbeln,Lifnr,Name1,Lfdat,Vstel,Anzahl,Status,Offenelief,Warenmenge,Lfart,Liefermenge"
+                enableAutoBinding="true"
+                showRowCount="true"
+                header="{i18n>vbelnTitle}">
+
+                <Table id="innerTable" growing="true" growingThreshold="20" growingScrollToLoad="true">
+                    <columns></columns>
+                    <items>
+                        <ColumnListItem press="onPressNavigation" type="Navigation"/>
+                    </items>
+                </Table>    
+
+            </smartTable:SmartTable>
+        </semantic:content>
+
+    </semantic:SemanticPage>
+</mvc:View>

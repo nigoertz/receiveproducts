@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZG2_ACADEMY_WARENEINGANG_SRV" xml:lang="de" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Lieferungen" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lieferung" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lieferant" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Name1" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Lfart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Lieferart" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Lfdat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Liefertermin" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Vstel" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Versandstelle" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Anzahl" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Pos. Anzahl" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Liefermenge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Gesamt" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Warenmenge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Gebucht" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Offenelief" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Offen" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <NavigationProperty Name="PositionenSet" Relationship="ZG2_ACADEMY_WARENEINGANG_SRV.Lieferung_to_Position" FromRole="FromRole_Lieferung_to_Position" ToRole="ToRole_Lieferung_to_Position"/>
+            </EntityType>
+            <EntityType Name="Positionen" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Posnr"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lieferung" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Bezeichnung" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lfimg" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Liefermenge" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="17" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gebuchtemenge" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Gebucht" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Offenelief" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Offen" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Basis-ME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Vgbel" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Vorlagebeleg" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Bestellung" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Wareneingang" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Posnr"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lieferung" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lfimg" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Liefermenge" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Lieferung_to_Position" sap:content-version="1">
+                <End Type="ZG2_ACADEMY_WARENEINGANG_SRV.Lieferungen" Multiplicity="1" Role="FromRole_Lieferung_to_Position"/>
+                <End Type="ZG2_ACADEMY_WARENEINGANG_SRV.Positionen" Multiplicity="*" Role="ToRole_Lieferung_to_Position"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Lieferung_to_Position">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Lieferung_to_Position">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZG2_ACADEMY_WARENEINGANG_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="LieferungenSet" EntityType="ZG2_ACADEMY_WARENEINGANG_SRV.Lieferungen" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PositionenSet" EntityType="ZG2_ACADEMY_WARENEINGANG_SRV.Positionen" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="WareneingangSet" EntityType="ZG2_ACADEMY_WARENEINGANG_SRV.Wareneingang" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Lieferung_to_PositionSet" Association="ZG2_ACADEMY_WARENEINGANG_SRV.Lieferung_to_Position" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="LieferungenSet" Role="FromRole_Lieferung_to_Position"/>
+                    <End EntitySet="PositionenSet" Role="ToRole_Lieferung_to_Position"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://cih-lob-as.cora-management.lcl:50000/sap/opu/odata/SAP/ZG2_ACADEMY_WARENEINGANG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://cih-lob-as.cora-management.lcl:50000/sap/opu/odata/SAP/ZG2_ACADEMY_WARENEINGANG_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

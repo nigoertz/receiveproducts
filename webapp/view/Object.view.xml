@@ -1,0 +1,56 @@
+<mvc:View
+    controllerName="com.generalgoods.mm.gtwo.receiveproducts.receiveproducts.controller.Object"
+    xmlns:uxap="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showFooter="true">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:snappedHeading>
+                    <ObjectHeader title="{Vbeln}" number="{Posnr}" numberUnit="{Lfimg}"></ObjectHeader>
+                </uxap:snappedHeading>
+
+                <uxap:expandedContent>
+                    <ObjectHeader title="{Vbeln}" number="{Posnr}" numberUnit="{Lfimg}">
+                        <ObjectAttribute title="{i18n>vbeln}" text="{Vbeln}"/>
+                        <ObjectAttribute title="{i18n>lifnr}" text="{Lifnr}"/>
+                        <ObjectAttribute title="{i18n>name}" text="{Name1}"/>
+                        <ObjectAttribute title="{i18n>lfart}" text="{Lfart}"/>
+                        <ObjectAttribute title="{i18n>lfdat}" text="{Lfdat}"/>
+                        <ObjectAttribute title="{i18n>vstel}" text="{Vstel}"/>
+                    </ObjectHeader>
+                </uxap:expandedContent>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection>
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <smartTable:SmartTable id="objectTable"
+                                entitySet="PositionenSet"
+                                tableType="ResponsiveTable"
+                                tableBindingPath="PositionenSet"
+                                initiallyVisibleFields="Posnr,Maktx,Matnr,Status,Offenelief,Gebuchtemenge,Lfimg,"
+                                enableAutoBinding="true">
+                                
+                                <Table id="objectInnerTable" mode="MultiSelect"> <!--SingleSelectMaster-->
+                                </Table>
+                            </smartTable:SmartTable>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+        <uxap:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer /><ToolbarSpacer />
+                <Button type="Emphasized" text="{i18n>createStorage}" press="openGoodsMovementDialog" />
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+</mvc:View>

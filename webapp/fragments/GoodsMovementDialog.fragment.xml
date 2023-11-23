@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="dGoodsMovement"
+        title="{i18n>storageDialogTitle}"
+        contentWidth="20rem">
+        <form:SimpleForm>
+            <Label text="{i18n>vbeln}" />
+            <Input value="{Vbeln}" editable="false"/>
+            <Label text="{i18n>posnr}" />
+            <Input value="{Posnr}" editable="false"/>
+            <Label text="{i18n>lfimg}" />
+            <Input value="{Lfimg}" type="Number"/>
+        </form:SimpleForm>
+        <beginButton>
+            <Button type="Emphasized"
+                icon="sap-icon://save"
+                text="{i18n>save}"
+                press="createGoodsMovement" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancel}"
+                press="onCancelGoodsMovement" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
