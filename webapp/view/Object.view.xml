@@ -39,7 +39,7 @@
                                 initiallyVisibleFields="Positionsnummer,Materialkurztext,Materialnummer,Status,Offen,Gebucht,Gesamt,"
                                 enableAutoBinding="true">
                                 
-                                <Table id="objectInnerTable" mode="SingleSelectMaster"></Table> <!--MultiSelect für Mehrfachauswahl-->
+                                <Table id="objectInnerTable" mode="MultiSelect"></Table> <!--MultiSelect für Mehrfachauswahl-->
                             </smartTable:SmartTable>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>

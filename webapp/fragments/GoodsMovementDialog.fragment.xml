@@ -9,8 +9,8 @@
             <Input value="{Belegnummer}" editable="false"/>
             <Label text="{i18n>positionsnummer}" />
             <Input value="{Positionsnummer}" editable="false"/>
-            <Label text="{i18n>gesamt}" />
-            <Input value="{Gesamt}" type="Number"/>
+            <Label text="{i18n>liefermenge}" />
+            <Input value="{Liefermenge}" type="Number"/>
         </form:SimpleForm>
         <beginButton>
             <Button type="Emphasized"

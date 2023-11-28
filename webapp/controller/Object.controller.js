@@ -123,8 +123,6 @@ sap.ui.define([
             // Wurde überhaupt eine Row selektiert?
             if (oSelectedItem) {
                 
-                console.log(this);
-
                 // Der Dialog kann geschlossen werden
                 if (this._gmDialog) {
                     this._gmDialog.destroy();
