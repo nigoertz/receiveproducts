@@ -25,7 +25,7 @@
                 tableType="ResponsiveTable"
                 entitySet="LieferungenSet"
                 smartFilterId="masterFilterBar"
-                initiallyVisibleFields="Belegnummer,Lieferantennummer,Lieferantenname,Lieferdatum,Werk,Anzahl,Belegstatus,Offen,Gebucht,Lieferart,Gesamt"
+                initiallyVisibleFields="Belegnummer,Lieferantennummer,Lieferantenname,Lieferdatum,Werk,Anzahl,Belegstatus,Offen,Gesamt"
                 enableAutoBinding="true"
                 showRowCount="true"
                 header="{i18n>vbelnTitle}">
