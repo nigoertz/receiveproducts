@@ -5,12 +5,12 @@
         title="{i18n>storageDialogTitle}"
         contentWidth="20rem">
         <form:SimpleForm>
-            <Label text="{i18n>vbeln}" />
-            <Input value="{Vbeln}" editable="false"/>
-            <Label text="{i18n>posnr}" />
-            <Input value="{Posnr}" editable="false"/>
-            <Label text="{i18n>lfimg}" />
-            <Input value="{Lfimg}" type="Number"/>
+            <Label text="{i18n>belegnummer}" />
+            <Input value="{Belegnummer}" editable="false"/>
+            <Label text="{i18n>positionsnummer}" />
+            <Input value="{Positionsnummer}" editable="false"/>
+            <Label text="{i18n>gesamt}" />
+            <Input value="{Gesamt}" type="Number"/>
         </form:SimpleForm>
         <beginButton>
             <Button type="Emphasized"

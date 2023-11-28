@@ -10,17 +10,17 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:snappedHeading>
-                    <ObjectHeader title="{Vbeln}" number="{Posnr}" numberUnit="{Lfimg}"></ObjectHeader>
+                    <ObjectHeader title="{Belegnummer}" number="{Positionsnummer}" numberUnit="{Gesamt}"></ObjectHeader>
                 </uxap:snappedHeading>
 
                 <uxap:expandedContent>
-                    <ObjectHeader title="{Vbeln}" number="{Posnr}" numberUnit="{Lfimg}">
-                        <ObjectAttribute title="{i18n>vbeln}" text="{Vbeln}"/>
-                        <ObjectAttribute title="{i18n>lifnr}" text="{Lifnr}"/>
-                        <ObjectAttribute title="{i18n>name}" text="{Name1}"/>
-                        <ObjectAttribute title="{i18n>lfart}" text="{Lfart}"/>
-                        <ObjectAttribute title="{i18n>lfdat}" text="{Lfdat}"/>
-                        <ObjectAttribute title="{i18n>vstel}" text="{Vstel}"/>
+                    <ObjectHeader title="{Belegnummer}" number="{Positionsnummer}" numberUnit="{Gesamt}">
+                        <ObjectAttribute title="{i18n>belegnummer}" text="{Belegnummer}"/>
+                        <ObjectAttribute title="{i18n>lieferantennummer}" text="{Lieferantennummer}"/>
+                        <ObjectAttribute title="{i18n>lieferantenname}" text="{Lieferantenname}"/>
+                        <ObjectAttribute title="{i18n>lieferart}" text="{Lieferart}"/>
+                        <ObjectAttribute title="{i18n>lieferdatum}" text="{Lieferdatum}"/>
+                        <ObjectAttribute title="{i18n>werk}" text="{Werk}"/>
                     </ObjectHeader>
                 </uxap:expandedContent>
             </uxap:ObjectPageDynamicHeaderTitle>
@@ -31,15 +31,15 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <smartTable:SmartTable id="objectTable"
+                            <smartTable:SmartTable 
+                                id="objectTable"
                                 entitySet="PositionenSet"
                                 tableType="ResponsiveTable"
                                 tableBindingPath="PositionenSet"
-                                initiallyVisibleFields="Posnr,Maktx,Matnr,Status,Offenelief,Gebuchtemenge,Lfimg,"
+                                initiallyVisibleFields="Positionsnummer,Materialkurztext,Materialnummer,Status,Offen,Gebucht,Gesamt,"
                                 enableAutoBinding="true">
                                 
-                                <Table id="objectInnerTable" mode="MultiSelect"> <!--SingleSelectMaster-->
-                                </Table>
+                                <Table id="objectInnerTable" mode="SingleSelectMaster"></Table> <!--MultiSelect für Mehrfachauswahl-->
                             </smartTable:SmartTable>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
@@ -48,8 +48,8 @@
         </uxap:sections>
         <uxap:footer>
             <OverflowToolbar>
-                <ToolbarSpacer /><ToolbarSpacer />
-                <Button type="Emphasized" text="{i18n>createStorage}" press="openGoodsMovementDialog" />
+                <ToolbarSpacer/><ToolbarSpacer/>
+                <Button type="Emphasized" text="{i18n>createStorage}" press="openGoodsMovementDialog"/>
             </OverflowToolbar>
         </uxap:footer>
     </uxap:ObjectPageLayout>

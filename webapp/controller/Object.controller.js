@@ -66,8 +66,8 @@ sap.ui.define([
          * @private
          */
         _onObjectMatched : function (oEvent) {
-            var sVbeln =  oEvent.getParameter("arguments").Vbeln;
-            this._bindView(`/LieferungenSet('${sVbeln}')`);
+            var sBelegnummer =  oEvent.getParameter("arguments").Belegnummer;
+            this._bindView(`/LieferungenSet('${sBelegnummer}')`);
         },
 
         /**
@@ -106,7 +106,7 @@ sap.ui.define([
 
             var oResourceBundle = this.getResourceBundle(),
                 oObject = oView.getBindingContext().getObject(),
-                sObjectId = oObject.Vbeln,
+                sObjectId = oObject.Belegnummer,
                 sObjectName = oObject.LieferungenSet;
 
                 oViewModel.setProperty("/busy", false);
@@ -117,59 +117,63 @@ sap.ui.define([
         },
 
         openGoodsMovementDialog: function () {
-            // we need to check first if a row has been selected in the objectInnerTable
-            let oTable = this.byId("objectInnerTable");
-            let oSelectedItem = oTable.getSelectedItem();
+            // In der Object.view.xml selektierte Row holen 
+            let oSelectedItem = this.byId("objectInnerTable").getSelectedItem();
 
+            // Wurde überhaupt eine Row selektiert?
             if (oSelectedItem) {
+                
+                console.log(this);
+
+                // Der Dialog kann geschlossen werden
                 if (this._gmDialog) {
                     this._gmDialog.destroy();
                     this._gmDialog = undefined;
                 }
-                // load fragment by specifing the namespace + path
+
+                // Dialog-Fragment holen
                 Fragment.load({
                     id: this.getView().getId(),
                     name: "com.generalgoods.mm.gtwo.receiveproducts.receiveproducts.fragments.GoodsMovementDialog",
                     type: "XML",
                     controller: this,
                 }).then((oDialog) => {
+                    // Fragment zur View hinzufügen
                     this.getView().addDependent(oDialog);
                     this._gmDialog = oDialog;
 
+                    // Daten für den Dialog vorbereiten
                     let oModel = this.getModel();
-                    let sPath = this.getView()
-                        .getBindingContext()
-                        .getPath();
+                    let sPath = this.getView().getBindingContext().getPath();
                     let oViewData = oModel.getProperty(sPath);
-                    let sItemPath = oSelectedItem
-                        .getBindingContext()
-                        .getPath();
+                    let sItemPath = oSelectedItem.getBindingContext().getPath();
                     let oItemData = oModel.getProperty(sItemPath);
 
-                    // create a new Entry for the MaterialDocument Entity
+                    // Neue Einträge im Model erstellen
                     let oBindingContext = oModel.createEntry(
                         "/WareneingangSet",
                         {
                             properties: {
-                                Vbeln: oViewData.Vbeln,
-                                Posnr: oItemData.Posnr,
-                                Lfimg: 0
+                                Belegnummer: oViewData.Belegnummer,
+                                Positionsnummer: oItemData.Positionsnummer,
+                                Liefermenge: 0
                             },
                             success: (oData) => {
                                 MessageToast.show(
                                     this.getResourceBundle().getText(
+                                        // Nice, alles hat geklappt -> siehe i18n für Übersetzung
                                         "mt.success.gm"
                                     )
                                 );
 
+                                // SmartTable refresh um die neuen Daten anzuzeigen
                                 this.getView().setBusy(false);
-
-                                // refresh the binding of the smartTable
                                 this.byId("objectTable").rebindTable(
                                     true
                                 );
                             },
                             error: (oError) => {
+                                // Änderungen zurücksetzen, Error in die Console schreiben
                                 oModel.resetChanges();
                                 this.getView().setBusy(false);
                                 console.log(oError);
@@ -177,28 +181,27 @@ sap.ui.define([
                         }
                     );
 
-                    // set the Binding Context to the Dialog
                     oDialog.setBindingContext(oBindingContext);
-
                     oDialog.open();
                 });
             } else {
                 MessageBox.error(
                     this.getResourceBundle().getText(
+                        // Es wurde keine Row selektiert -> siehe i18n für Übersetzung
                         "mb.error.noSelection"
                     )
                 );
             }
         },
 
-        /**
-         * Closes the GoodsMovement Dialog
-         */
         onCancelGoodsMovement: function () {
+
+            // Dialog vollständig wegschießen (schließen, destroyen und auf undefined setzen)
             this._gmDialog.close();
             this._gmDialog.destroy();
             this._gmDialog = undefined;
 
+            // oModel Änderungen verwerfen (sollten Änderungen vorhanden sein)
             let oModel = this.getModel();
 
             if (oModel.hasPendingChanges()) {
@@ -207,22 +210,24 @@ sap.ui.define([
         },
 
         createGoodsMovement: function() {
-            let oGMDialog = this.byId("dGoodsMovement");
             let oModel = this.getView().getModel();
-            let sPath = oGMDialog.getBindingContext().getPath();
+            let sPath = this.byId("dGoodsMovement").getBindingContext().getPath();
             let oGMData = oModel.getProperty(sPath);
             let bValidated = true;
             
-            if (!oGMData.Vbeln) {
+            // Wurden die Felder gültig gefüllt? -> Nein? Validierung = false
+            if (!oGMData.Belegnummer) {
                 bValidated = false;
             }
-            if (!oGMData.Posnr) {
+            if (!oGMData.Positionsnummer) {
                 bValidated = false;
             }
-            if (!oGMData.Lfimg) {
+            if (!oGMData.Liefermenge) {
                 bValidated = false;
             }
 
+            // Der Dialog kann geschlossen werden, wenn die Validierung ok ist,
+            // Die Änderungen werden über das oModel "gepushed"
             if (bValidated) {
                 this.getView().setBusy(true);
                 this._gmDialog.close();
@@ -233,6 +238,7 @@ sap.ui.define([
             } else {
                 MessageBox.error(
                     this.getResourceBundle().getText(
+                        // Validierung fehlgeschlagen -> siehe i18n für Übersetzung
                         "mb.error.requiredFields"
                     )
                 );

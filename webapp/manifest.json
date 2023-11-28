@@ -103,7 +103,7 @@
           ]
         },
         {
-          "pattern": "LieferungenSet/{Vbeln}",
+          "pattern": "LieferungenSet/{Belegnummer}",
           "name": "object",
           "target": [
             "object"

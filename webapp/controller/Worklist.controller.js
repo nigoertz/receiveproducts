@@ -82,7 +82,7 @@ sap.ui.define([
             console.log(oData);
 
             this.getRouter().navTo("object", {
-                Vbeln: oData.Vbeln
+                Belegnummer: oData.Belegnummer
             });
         },
 
@@ -109,7 +109,7 @@ sap.ui.define([
 
                 if (sQuery && sQuery.length > 0) {
                     
-                    aTableSearchState = [new Filter("vbeln", FilterOperator.Contains, sQuery)];
+                    aTableSearchState = [new Filter("Belegnummer", FilterOperator.Contains, sQuery)];
                 }
                 this._applySearch(aTableSearchState);
             }
